@@ -25,14 +25,20 @@ const MultiStepForm = () => {
     };
 
     return (
-        <FormProvider {...methods} children={
+        <FormProvider {...methods}>
             <form onSubmit={e => e.preventDefault()}>
                 <Step step={currentStep} />
                 <button type="button" onClick={validateStep}>
                     {stepIndex < formDataModel.steps.length - 1 ? 'Next' : 'Submit'}
                 </button>
             </form>
-        } />
+
+            {submittedData && (
+                <pre>
+                    {JSON.stringify(submittedData, null, 2)}
+                </pre>
+            )}
+        </FormProvider>
     );
 };
 
