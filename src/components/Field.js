@@ -12,7 +12,7 @@ export const Field = ({ field }) => {
     if (!isVisible) return null;
 
     return (
-        <div style={{ marginBottom: '1rem' }}>
+        <div className="pure-control-group">
             <label>
                 {field.label}
                 {field.required && ' *'}

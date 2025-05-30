@@ -26,15 +26,15 @@ const MultiStepForm = () => {
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={e => e.preventDefault()}>
+            <form onSubmit={e => e.preventDefault()} className='pure-form pure-form-stacked'>
                 <Step step={currentStep} />
-                <button type="button" onClick={validateStep}>
+                <button type="button" onClick={validateStep} className='pure-button pure-button-primary'>
                     {stepIndex < formDataModel.steps.length - 1 ? 'Next' : 'Submit'}
                 </button>
             </form>
 
             {submittedData && (
-                <pre>
+                <pre className='code'>
                     {JSON.stringify(submittedData, null, 2)}
                 </pre>
             )}

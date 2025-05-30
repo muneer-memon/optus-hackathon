@@ -3,10 +3,10 @@ import React from "react";
 
 export const Step = ({ step }) => {
     return (
-        <div>
+        <fieldset>
             {step.fields.map((field) => {
                 return <Field key={field.name} field={field} />;
             })}
-        </div>
+        </fieldset>
     );
 };
