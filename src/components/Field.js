@@ -11,42 +11,25 @@ export const Field = ({ field }) => {
 
     if (!isVisible) return null;
 
-    const {
-        type,
-        label,
-        required,
-        name,
-    } = field;
-
-    const labelText = `${label} ${required ? '*' : ''}`.trim();
-
-    const isToggleType = type === 'radio' || type === 'checkbox';
-
     return (
-        <div className="pure-control-group">
+        <div style={{ marginBottom: '1rem' }}>
             <label>
-                {!isToggleType && (
-                    <>
-                        {labelText}
-                        {type === 'select' ? (
-                            <select {...register(name, { required })}>
-                                <option value="">Select...</option>
-                                {field?.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                            </select>
-                        ) : (
-                            <input type={type} {...register(name, { required })} />
-                        )}
-                    </>
-                )}
-
-                {isToggleType && (
-                    <>
-                        <input type={type} {...register(name, { required })} />
-                        {labelText}
-                    </>
+                {field.label}
+                {field.required && ' *'}
+                {field.type === 'select' ? (
+                    <select {...register(field.name, { required: field.required })}>
+                        <option value="">Select...</option>
+                        {field.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                    </select>
+                ) : field.type === 'checkbox' ? (
+                    <input type="checkbox" {...register(field.name)} />
+                ) : field.type === 'file' ? (
+                    <input type="file" {...register(field.name)} />
+                ) : (
+                    <input type={field.type} {...register(field.name, { required: field.required })} />
                 )}
             </label>
-            {errors[name] && <p style={{ color: 'red' }}>{label} is required</p>}
+            {errors[field.name] && <p style={{ color: 'red' }}>{field.label} is required</p>}
         </div>
     );
 };

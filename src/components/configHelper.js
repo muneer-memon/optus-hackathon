@@ -40,6 +40,12 @@ export const datamodel = {
                         type: 'text',
                         required: true,
                         visibleIf: { owner_of_account: 'no' }
+                    },
+                    {
+                        name: 'upload_image',
+                        label: 'Upload Image',
+                        type: 'file',
+                        required: false
                     }
                 ]
             }
