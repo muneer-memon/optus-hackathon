@@ -1,27 +1,28 @@
 import React from 'react';
-
-import logo from './logo.svg';
 import './App.css';
 import MultiStepForm from './components/MultiStepForm';
+import {SimpleForm} from "./components/SimpleForm";
+import {MediumForm} from "./components/MediumForm";
+
 
 function App() {
+  window.formName = 'multi-step'; // Change this to 'medium' or 'simple' to test other forms
+  const identifyForm = () => {
+    const formType = window.formName;
+    switch (formType) {
+      case 'multi-step':
+        return <MultiStepForm />;
+      case 'medium':
+        return <MediumForm />;
+      case 'simple':
+        return <SimpleForm />;
+      default:
+        return null;
+    }
+  };
   return (
     <div className="App">
-      {/*<header className="App-header">*/}
-      {/*  <img src={logo} className="App-logo" alt="logo" />*/}
-      {/*  <p>*/}
-      {/*    Edit <code>src/App.js</code> and save to reload.*/}
-      {/*  </p>*/}
-      {/*  <a*/}
-      {/*    className="App-link"*/}
-      {/*    href="https://reactjs.org"*/}
-      {/*    target="_blank"*/}
-      {/*    rel="noopener noreferrer"*/}
-      {/*  >*/}
-      {/*    Learn React*/}
-      {/*  </a>*/}
-      {/*</header>*/}
-      <MultiStepForm />
+      {identifyForm()}
     </div>
   );
 }
