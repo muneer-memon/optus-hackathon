@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import MultiStepForm from './components/MultiStepForm';
 import {SimpleForm} from "./components/SimpleForm";
 import {MediumForm} from "./components/MediumForm";
+import {useWindowVariable} from "./components/helpers/formWatcher";
 
 
 function App() {
-  // window.formName = 'multi-step'; // Change this to 'medium' or 'simple' to test other forms
-  // Initialize state with the current window.formName value
-  const [formName, setFormName] = useState(window.formName || 'multi-step');
-
-  // Update state if window.formName changes outside React
-  useEffect(() => {
-    const handleFormNameChange = () => {
-      setFormName(window.formName);
-    };
-
-    // Check for changes periodically (or use other methods if available)
-    const interval = setInterval(handleFormNameChange, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const formName = useWindowVariable('formName', 'multi-step');
   const identifyForm = () => {
     switch (formName) {
       case 'multi-step':
