@@ -2,17 +2,18 @@ import {FormProvider, useForm} from "react-hook-form";
 import React, {useState} from "react";
 import {datamodel} from "./configHelper";
 import {Field} from "./Field";
+import Code from '../components/Code';
 
 export const SimpleForm = () => {
     const methods = useForm();
     const [submitted, setSubmitted] = useState(null);
     return (
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(setSubmitted)}>
+            <form onSubmit={methods.handleSubmit(setSubmitted)} className='pure-form pure-form-stacked'>
                 {datamodel.simpleForm.fields.map(field => <Field key={field.name} field={field} />)}
-                <button type="submit">Submit</button>
+                <button type="submit" className='pure-button pure-button-primary'>Submit</button>
             </form>
-            {submitted && <pre>{JSON.stringify(submitted, null, 2)}</pre>}
+            <Code submittedData={submitted} />
         </FormProvider>
     );
 };
