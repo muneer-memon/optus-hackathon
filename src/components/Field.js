@@ -11,21 +11,42 @@ export const Field = ({ field }) => {
 
     if (!isVisible) return null;
 
+    const {
+        type,
+        label,
+        required,
+        name,
+    } = field;
+
+    const labelText = `${label} ${required ? '*' : ''}`.trim();
+
+    const isToggleType = type === 'radio' || type === 'checkbox';
+
     return (
         <div className="pure-control-group">
             <label>
-                {field.label}
-                {field.required && ' *'}
-                {field.type === 'select' ? (
-                    <select {...register(field.name, { required: field.required })}>
-                        <option value="">Select...</option>
-                        {field.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                    </select>
-                ) : (
-                    <input type={field.type} {...register(field.name, { required: field.required })} />
+                {!isToggleType && (
+                    <>
+                        {labelText}
+                        {type === 'select' ? (
+                            <select {...register(name, { required })}>
+                                <option value="">Select...</option>
+                                {field?.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            </select>
+                        ) : (
+                            <input type={type} {...register(name, { required })} />
+                        )}
+                    </>
+                )}
+
+                {isToggleType && (
+                    <>
+                        <input type={type} {...register(name, { required })} />
+                        {labelText}
+                    </>
                 )}
             </label>
-            {errors[field.name] && <p style={{ color: 'red' }}>{field.label} is required</p>}
+            {errors[name] && <p style={{ color: 'red' }}>{label} is required</p>}
         </div>
     );
 };

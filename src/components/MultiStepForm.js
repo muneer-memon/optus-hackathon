@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import {datamodel} from "./configHelper";
 import {Step} from "./Step";
+import Code from '../components/Code';
 
 const MultiStepForm = () => {
     const formDataModel = datamodel.multiStepForm;
@@ -32,12 +33,7 @@ const MultiStepForm = () => {
                     {stepIndex < formDataModel.steps.length - 1 ? 'Next' : 'Submit'}
                 </button>
             </form>
-
-            {submittedData && (
-                <pre className='code'>
-                    {JSON.stringify(submittedData, null, 2)}
-                </pre>
-            )}
+            <Code submittedData={submittedData} />
         </FormProvider>
     );
 };
