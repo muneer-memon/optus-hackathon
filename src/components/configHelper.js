@@ -43,9 +43,11 @@ export const datamodel = {
                     },
                     {
                         name: 'upload_image',
-                        label: 'Upload Image',
-                        type: 'file',
-                        required: false
+                        label: 'Uploaded Image',
+                        type: 'image',
+                        required: false,
+                        src: 'https://picsum.photos/200/200?random=1',
+                        visibleIf: { owner_of_account: 'no' }
                     }
                 ]
             }
